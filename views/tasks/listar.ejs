@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minhas Tarefas</title>
+    <link rel="stylesheet" href="/tailwind.css" />
+  </head>
+  <body>
+    <div class="min-h-screen bg-gray-500 flex flex-col justify-center">
+      <h2 class="text-3xl font-bold text-white text-center mb-8">
+        Minhas Tarefas
+      </h2>
+      <div class="flex flex-1 items-center justify-center">
+        <div
+          class="bg-white rounded-xl shadow-lg px-8 py-10 w-[50vw] min-w-[320px] min-h-[300px]"
+        >
+          <div class="flex justify-between mb-6">
+            <a
+              href="/tasks/new"
+              class="text-blue-600 font-semibold bg-blue-100 hover:bg-blue-200 rounded-md px-4 py-2 transition"
+              >Nova Tarefa</a
+            >
+            <a href="/logout" class="text-red-600 font-semibold hover:underline"
+              >Sair</a
+            >
+          </div>
+          <ul class="flex flex-col gap-4">
+            <% tasks.forEach(function(task) { %>
+            <li
+              class="border rounded-lg px-4 py-3 flex flex-col md:flex-row md:items-center justify-between bg-gray-50"
+            >
+              <div>
+                <strong class="text-lg"><%= task.title %></strong>
+                <span class="ml-2 text-gray-600"><%= task.description %></span>
+                <% if (task.completed) { %>
+                <span class="ml-2 text-green-600 font-semibold"
+                  >[Completada]</span
+                >
+                <% } %>
+              </div>
+              <div class="flex gap-2 mt-2 md:mt-0">
+                <% if (!task.completed) { %>
+                <form action="/tasks/complete/<%= task.id %>" method="POST">
+                  <button
+                    type="submit"
+                    class="text-green-600 bg-green-100 hover:bg-green-200 rounded-md px-3 py-1 font-semibold transition"
+                  >
+                    Completar
+                  </button>
+                </form>
+                <% } %>
+                <a
+                  href="/tasks/edit/<%= task.id %>"
+                  class="text-blue-600 bg-blue-100 hover:bg-blue-200 rounded-md px-3 py-1 font-semibold transition"
+                  >Editar</a
+                >
+                <form action="/tasks/delete/<%= task.id %>" method="POST">
+                  <button
+                    type="submit"
+                    class="text-red-600 bg-red-100 hover:bg-red-200 rounded-md px-3 py-1 font-semibold transition"
+                  >
+                    Excluir
+                  </button>
+                </form>
+              </div>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
