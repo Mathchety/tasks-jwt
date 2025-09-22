@@ -20,5 +20,11 @@
   ```bash
   npm start
   ```
+4. **Inicie o Tailwind:**
+  Execute o comando abaixo para iniciar a estilização.
+
+  ```bash
+  npx tailwindcss -i ./public/styles.css -o ./public/tailwind.css --watch
+  ```
 
 Pronto! O projeto estará rodando conforme as configurações definidas no arquivo `.env`.
