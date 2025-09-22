@@ -2,7 +2,6 @@ const Task = require('../models/Task');
 const User = require('../models/User');
 
 
-// Renderiza lista de tarefas
 const renderList = async (req, res) => {
   try {
     const tasks = await Task.findAll({ where: { user_id: req.user.id } });
@@ -12,12 +11,10 @@ const renderList = async (req, res) => {
   }
 };
 
-// Renderiza formulário de nova tarefa
 const renderNew = (req, res) => {
   res.render('tasks/nova');
 };
 
-// Cria nova tarefa
 const create = async (req, res) => {
   try {
     await Task.create({ ...req.body, user_id: req.user.id });
@@ -27,7 +24,6 @@ const create = async (req, res) => {
   }
 };
 
-// Renderiza formulário de edição
 const renderEdit = async (req, res) => {
   try {
     const task = await Task.findOne({ where: { id: req.params.id, user_id: req.user.id } });
@@ -38,7 +34,6 @@ const renderEdit = async (req, res) => {
   }
 };
 
-// Edita tarefa
 const edit = async (req, res) => {
   try {
     const { title, description } = req.body;
@@ -49,7 +44,6 @@ const edit = async (req, res) => {
   }
 };
 
-// Completa tarefa
 const complete = async (req, res) => {
   try {
     await Task.update({ completed: true }, { where: { id: req.params.id, user_id: req.user.id } });
@@ -59,7 +53,6 @@ const complete = async (req, res) => {
   }
 };
 
-// Exclui tarefa
 const remove = async (req, res) => {
   try {
     await Task.destroy({ where: { id: req.params.id, user_id: req.user.id } });
